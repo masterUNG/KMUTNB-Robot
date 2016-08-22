@@ -38,7 +38,7 @@ void loop()
                "Host: " + host + "\r\n" +
                "Connection: keep-alive\r\n" +
                "Cache-Control: max-age=0\r\n\r\n");
-  delay(3000);
+  delay(1000);
   while (client.available()) 
   {
     String line = client.readStringUntil('\r');
