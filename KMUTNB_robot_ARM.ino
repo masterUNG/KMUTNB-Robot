@@ -1,10 +1,18 @@
+#include <Servo.h>
 #include <ESP8266WiFi.h>                // Include main library
+
+#define SERVO_PIN D2  // นี่คือกำหนดขาให้ Servo
+
 const char* ssid     = "ITED";     // Set SSID
 const char* password = "ited2315"; // Set password
 const char* host = "dweet.io";          // Set host 
 
+Servo myservo;  // ประกาศ object ของการใช้ Servo
+int analogValue = 0;
+
 void setup() 
 {
+  myservo.attach(SERVO_PIN);
   Serial.begin(115200);                 // Print setting message
   delay(10);
   Serial.println();
@@ -21,7 +29,7 @@ void setup()
   Serial.println("WiFi connected");     // Print connect status
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());       // Print IP address
-}
+} // setup
 
 void loop() 
 {
@@ -43,5 +51,14 @@ void loop()
   {
     String line = client.readStringUntil('\r');
     Serial.println(line);
-  }
-}
+
+    String test = line.substring(137, 140);
+    Serial.println(test);
+
+    analogValue = test.toInt(); // Change String to int
+    analogValue = map(analogValue, 0, 1023, 0, 140);
+    myservo.write(analogValue);
+
+    
+  } // while
+} // loop
