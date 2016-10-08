@@ -3,12 +3,12 @@
 
 #define SERVO_PIN D2  // นี่คือกำหนดขาให้ Servo
 
-const char* ssid     = "ITED";     // Set SSID
-const char* password = "ited2315"; // Set password
+const char* ssid     = "shareEWTC";     // Set SSID
+const char* password = "12345abcde"; // Set password
 const char* host = "dweet.io";          // Set host 
 
 Servo myservo;  // ประกาศ object ของการใช้ Servo
-int analogValue = 0;
+int analogValue;
 
 void setup() 
 {
@@ -56,7 +56,13 @@ void loop()
     Serial.println(test);
 
     analogValue = test.toInt(); // Change String to int
-    analogValue = map(analogValue, 0, 1023, 0, 140);
+    //analogValue = map(analogValue, 0, 1023, 0, 140);
+
+    Serial.println();
+    Serial.println();
+    Serial.print("andlogValue ==> ");
+    Serial.println(analogValue);
+    
     myservo.write(analogValue);
 
     
